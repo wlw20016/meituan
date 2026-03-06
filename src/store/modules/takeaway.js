@@ -8,6 +8,7 @@ const foodsStore = createSlice({
     foodsList:[],
     activeIdex: 0,
     cartList: [],
+    visible:false,
   },
   reducers: {
     setFoodsList(state, action) {
@@ -22,6 +23,9 @@ const foodsStore = createSlice({
       }else{
         state.cartList.push(action.payload)
       }
+    },
+    setVisible(state, action){
+      state.visible = action.payload
     }
   }
 })

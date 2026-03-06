@@ -6,26 +6,18 @@ import Count from '../Count'
 import './index.scss'
 
 const Cart = () => {
-  const { cartList } = useSelector(state => state.foods)
-  // 计算总价 
-  const totalPrice = cartList.reduce((a, c) => a + c.price * c.count, 0)
+  const {cartList, visible} = useSelector(state => state.foods)
+  const totalPrice = cartList.reduse((sum, per)=> sum + per.count * per.price, 0)
+  const onShow = ()=>{
 
-  const dispatch = useDispatch()
-
-  // 控制购物车打开关闭的状态
-  const [visible, setVisible] = useState(false)
-
-  const onShow = () => {
-    if (cartList.length > 0) {
-      setVisible(true)
-    }
   }
+  const dispatch = useDispatch()
   return (
     <div className="cartContainer">
       {/* 遮罩层 添加visible类名可以显示出来 */}
       <div
         className={classNames('cartOverlay', visible && 'visible')}
-        onClick={() => setVisible(false)}
+        onClick={() => dispatch(setVisible(false))}
       />
       <div className="cart">
         {/* fill 添加fill类名购物车高亮*/}
