@@ -99,6 +99,10 @@
     margin-right: 4px;
   }
   .menu-search-text {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%; // 根据需要撑开宽度
     font-size: 11px;
     color: #858687;
     text-align: center;
