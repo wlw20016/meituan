@@ -8,7 +8,7 @@ const foodsStore = createSlice({
     foodsList:[],
     activeIdex: 0,
     cartList: [],
-    visible:false,
+
   },
   reducers: {
     setFoodsList(state, action) {
@@ -24,17 +24,17 @@ const foodsStore = createSlice({
         state.cartList.push(action.payload)
       }
     },
-    setVisible(state, action){
-      state.visible = action.payload
-    },
     increCount(state, action){
       state.cartList.find(item => item.id ===action.payload.id).count++
     },
     decreCount(state, action){
-      if(state.cartList.find(item => item.id ===action.payload.id).count === 0){
-        return
+      const item = state.cartList.find(item => item.id === action.payload.id)
+      if (item) {
+        item.count--
+        if (item.count === 0) {
+          state.cartList = state.cartList.filter(cartItem => cartItem.id !== action.payload.id)
+        }
       }
-      state.cartList.find(item => item.id ===action.payload.id).count--
     },
     clearCart(state){
       state.cartList = []

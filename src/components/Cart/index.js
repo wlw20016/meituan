@@ -1,22 +1,26 @@
 import classNames from 'classnames'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { decreCount, increCount, clearCart } from '../../store/modules/takeaway'
 import Count from '../Count'
 import './index.scss'
 
 const Cart = () => {
-  const {cartList, visible} = useSelector(state => state.foods)
-  const totalPrice = cartList.reduse((sum, per)=> sum + per.count * per.price, 0)
-  const onShow = ()=>{
-
-  }
+  const {cartList} = useSelector(state => state.foods)
+  const totalPrice = cartList.reduce((sum, per)=> sum + per.count * per.price, 0)
+  const [visible, setVisible] = useState(false)
   const dispatch = useDispatch()
+  const onShow = () => {
+    if(cartList.length > 0){
+      setVisible(true)
+    }
+  }
   return (
     <div className="cartContainer">
       {/* 遮罩层 添加visible类名可以显示出来 */}
       <div
         className={classNames('cartOverlay', visible && 'visible')}
-        onClick={() => dispatch(setVisible(false))}
+        onClick={() => setVisible(false)}
       />
       <div className="cart">
         {/* fill 添加fill类名购物车高亮*/}
@@ -53,8 +57,8 @@ const Cart = () => {
         {/* 购物车列表 */}
         <div className="scrollArea">
           {cartList.map(item => {
-            return (
-              <div className="cartItem" key={item.id}>
+            return (cartList.length > 0 &&
+              (<div className="cartItem" key={item.id}>
                 <img className="shopPic" src={item.picture} alt="" />
                 <div className="main">
                   <div className="skuInfo">
@@ -73,7 +77,7 @@ const Cart = () => {
                     onMinus={() => dispatch(decreCount({ id: item.id }))}
                   />
                 </div>
-              </div>
+              </div>)
             )
           })}
         </div>
