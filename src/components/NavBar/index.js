@@ -1,6 +1,6 @@
 import './index.scss'
 
-const NavBar = () => {
+const NavBar = ({ searchQuery, onSearch }) => {
   return (
     <nav className="nav">
       <div className="menu">
@@ -16,7 +16,13 @@ const NavBar = () => {
       <div className="menu-search">
         <div className="menu-form">
           <div className="menu-search-icon"></div>
-          <div className="menu-search-text">请输入菜品名称</div>
+          <input 
+            type="text"
+            className="menu-search-text"
+            placeholder="请输入菜品名称"
+            value={searchQuery}
+            onChange={(e) => onSearch(e.target.value)}
+          />
         </div>
       </div>
     </nav>

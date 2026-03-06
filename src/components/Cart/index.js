@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { decreCount, increCount, clearCart } from '../../store/modules/takeaway'
 import Count from '../Count'
@@ -15,6 +15,12 @@ const Cart = () => {
       setVisible(true)
     }
   }
+  useEffect(() =>{
+    if(cartList.length === 0){
+      setVisible(false)
+    }
+  }, [cartList])
+
   return (
     <div className="cartContainer">
       {/* 遮罩层 添加visible类名可以显示出来 */}
