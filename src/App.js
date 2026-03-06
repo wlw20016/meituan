@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 
 
 const App = () => {
-  const foodsList = useSelector(state => state.foods.foodsList)
+  const {foodsList, activeIdex} = useSelector(state => state.foods)
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(fetchFoodsList())
@@ -30,14 +30,14 @@ const App = () => {
             <div className="goods-list">
               {/* 外卖商品列表 */}
               {foodsList.map((item, index) => {
-                return (
-                   <FoodsCategory
+                return (index === activeIdex &&
+                  ( <FoodsCategory
                     key={item.tag}
                     // 列表标题
                     name={item.name}
                     // 列表商品
                     foods={item.foods}
-                  />
+                  />)
                 )
               })}
             </div>
