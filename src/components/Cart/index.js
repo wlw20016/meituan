@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { decreCount, increCount, clearCart } from '../../store/modules/takeaway'
 import Count from '../Count'

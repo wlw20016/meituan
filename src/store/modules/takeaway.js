@@ -26,11 +26,23 @@ const foodsStore = createSlice({
     },
     setVisible(state, action){
       state.visible = action.payload
+    },
+    increCount(state, action){
+      state.cartList.find(item => item.id ===action.payload.id).count++
+    },
+    decreCount(state, action){
+      if(state.cartList.find(item => item.id ===action.payload.id).count === 0){
+        return
+      }
+      state.cartList.find(item => item.id ===action.payload.id).count--
+    },
+    clearCart(state){
+      state.cartList = []
     }
-  }
+  },
 })
 
-export const {setFoodsList, changeActiveIndex, addCart} = foodsStore.actions
+export const {setFoodsList, changeActiveIndex, addCart, increCount, decreCount, clearCart} = foodsStore.actions
 
 export const fetchFoodsList = ()=>{
   return async (dispatch) => {
